@@ -5,9 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Contract extends Model
+class Transaction extends Model
 {
     use HasFactory;
 
@@ -15,10 +14,7 @@ class Contract extends Model
         'sponsor_id',
         'fighter_id',
         'amount',
-        'duration',
-        'start_date',
-        'end_date',
-        'status',
+        'contract_id'
     ];
 
     public function sponsor(): BelongsTo
@@ -31,8 +27,8 @@ class Contract extends Model
         return $this->belongsTo(Fighter::class);
     }
 
-    public function transactions(): HasMany
+    public function contract(): BelongsTo
     {
-        return $this->hasMany(Transaction::class);
+        return $this->belongsTo(Contract::class);
     }
 }

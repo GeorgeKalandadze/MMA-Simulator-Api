@@ -49,4 +49,9 @@ class Fighter extends Model
         return $this->hasMany(Contract::class);
     }
 
+    public function transactions(): HasMany
+    {
+        return $this->hasMany(Transaction::class);
+    }
+
 }
