@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Fighter extends Model
 {
@@ -35,5 +36,10 @@ class Fighter extends Model
     public function martialArtStyle(): BelongsTo
     {
         return $this->belongsTo(MartialArtStyle::class);
+    }
+
+    public function skills(): BelongsToMany
+    {
+        return $this->belongsToMany(Skill::class)->withPivot('level')->withTimestamps();
     }
 }
