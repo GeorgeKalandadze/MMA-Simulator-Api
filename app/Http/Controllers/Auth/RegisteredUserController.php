@@ -24,18 +24,19 @@ class RegisteredUserController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
-            'role' => ['required', 'exists:roles,id'],
+            'role' => ['required', 'in:sponsor,fighter'],
         ], [
             'role.required' => 'Please choose whether you are a fighter or sponsor.',
-            'role.exists' => 'The selected role is invalid. Please choose either fighter or sponsor.',
+            'role.in' => 'The selected role is invalid. Please choose either fighter or sponsor.',
         ]);
 
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->string('password')),
-            'role_id' => $request->role,
         ]);
+
+        $user->assignRole($request->role);
 
         event(new Registered($user));
 
