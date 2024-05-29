@@ -22,11 +22,17 @@ class Fighter extends Model
         'weight',
         'weight_division_id',
         'martial_art_style_id',
+        'country_id',
     ];
 
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function country(): BelongsTo
+    {
+        return $this->belongsTo(Country::class);
     }
 
     public function weightDivision(): BelongsTo
@@ -63,6 +69,4 @@ class Fighter extends Model
     {
         return $this->hasMany(Fight::class, 'fighter2_id');
     }
-
-
 }

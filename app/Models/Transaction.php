@@ -14,7 +14,7 @@ class Transaction extends Model
         'sponsor_id',
         'fighter_id',
         'amount',
-        'contract_id'
+        'contract_id',
     ];
 
     public function sponsor(): BelongsTo

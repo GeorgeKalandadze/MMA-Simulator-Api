@@ -10,7 +10,7 @@ class Sponsor extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'email', 'balance',];
+    protected $fillable = ['name', 'email', 'balance'];
 
     public function contracts(): HasMany
     {
@@ -21,6 +21,4 @@ class Sponsor extends Model
     {
         return $this->hasMany(Transaction::class);
     }
-
-
 }
