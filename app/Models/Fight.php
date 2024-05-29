@@ -15,6 +15,7 @@ class Fight extends Model
         'fighter2_id',
         'winner_id',
         'fight_date',
+        'status',
         'location',
     ];
 
