@@ -13,7 +13,6 @@ class Fighter extends Model
     use HasFactory;
 
     protected $fillable = [
-        'user_id',
         'strength',
         'agility',
         'stamina',
