@@ -22,6 +22,8 @@ class FighterRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'firstname' => 'required|string|max:255',
+            'lastname' => 'required|string|max:255',
             'height' => 'required|numeric',
             'weight' => 'required|numeric|min:49|max:120',
             'martial_art_style_id' => 'required|exists:martial_art_styles,id',
