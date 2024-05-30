@@ -12,9 +12,12 @@ class RoleSeeder extends Seeder
      */
     public function run(): void
     {
+        $guardName = config('auth.defaults.guard');
+
         $roles = [
-            ['name' => 'fighter'],
-            ['name' => 'sponsor'],
+            ['name' => 'fighter', 'guard_name' => $guardName],
+            ['name' => 'sponsor', 'guard_name' => $guardName],
+            ['name' => 'organizer', 'guard_name' => $guardName],
         ];
 
         if (! DB::table('roles')->count()) {

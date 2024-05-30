@@ -14,6 +14,10 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             RoleSeeder::class,
+            MartialArtStyleSeeder::class,
+            WeightDivisionSeeder::class,
+            SkillSeeder::class,
+            CountrySeeder::class
         ]);
     }
 }
