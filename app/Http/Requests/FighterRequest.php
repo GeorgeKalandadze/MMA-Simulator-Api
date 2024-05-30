@@ -23,8 +23,7 @@ class FighterRequest extends FormRequest
     {
         return [
             'height' => 'required|numeric',
-            'weight' => 'required|numeric',
-            'weight_division_id' => 'required|exists:weight_divisions,id',
+            'weight' => 'required|numeric|min:49|max:120',
             'martial_art_style_id' => 'required|exists:martial_art_styles,id',
             'country_id' => 'required|exists:countries,id',
         ];

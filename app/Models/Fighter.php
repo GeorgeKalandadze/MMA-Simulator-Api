@@ -12,6 +12,7 @@ class Fighter extends Model
 {
     use HasFactory;
 
+
     protected $fillable = [
         'strength',
         'agility',
