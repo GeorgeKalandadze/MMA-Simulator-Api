@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/fighters', CreateFighterController::class);
-    Route::post('/fighter/improve-skill', ImproveFighterSkillController::class);
+    Route::post('/fighters/improve-skill', ImproveFighterSkillController::class);
 });
 
 require __DIR__.'/auth.php';
