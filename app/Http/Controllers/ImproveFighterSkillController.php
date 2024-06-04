@@ -4,25 +4,24 @@ namespace App\Http\Controllers;
 
 use App\Actions\Fighter\ImproveFighterSkill;
 use App\Http\Requests\ImproveSkillRequest;
+use App\Models\Skill;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class ImproveFighterSkillController extends Controller
 {
     /**
      * Handle the incoming request.
+     * @throws \Exception
      */
-    public function __invoke(ImproveSkillRequest $request, ImproveFighterSkill $improveFighterSkill)
+    public function __invoke(Skill $skill, ImproveFighterSkill $improveFighterSkill): JsonResponse
     {
-        $data = $request->validated();
         $user = auth()->user();
         $fighter = $user->fighter;
 
-        $result = $improveFighterSkill->execute($fighter, $data['skill_id']);
+        $improveFighterSkill->execute($fighter, $skill);
 
-        if ($result['success']) {
-            return response()->json(['message' => $result['message']], 200);
-        }
-
-        return response()->json(['message' => $result['message']], 400);
+        return response()->json(['message' => 'Skill improved successfully'], 200);
     }
 }

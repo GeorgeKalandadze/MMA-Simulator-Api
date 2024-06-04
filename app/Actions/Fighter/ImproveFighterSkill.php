@@ -9,13 +9,14 @@ use Exception;
 
 class ImproveFighterSkill
 {
-    public function execute(Fighter $fighter, int $skillId): array
+    /**
+     * @throws Exception
+     */
+    public function execute(Fighter $fighter, Skill $skill): void
     {
-        DB::beginTransaction();
-
         try {
-            $skill = Skill::findOrFail($skillId);
-            $currentSkillLevel = $fighter->skills()->where('skill_id', $skillId)->first()->pivot->level ?? 0;
+            DB::beginTransaction();
+            $currentSkillLevel = $fighter->skills()->find($skill->getKey())?->pivot?->level ?? 0;
 
             if ($currentSkillLevel >= 5) {
                 throw new Exception('Skill level cannot exceed the maximum limit of 5.');
@@ -29,15 +30,11 @@ class ImproveFighterSkill
 
             $fighter->balance -= $improvementCost;
             $fighter->save();
-            $fighter->skills()->syncWithoutDetaching([$skillId => ['level' => $currentSkillLevel + 1]]);
-
+            $fighter->skills()->syncWithoutDetaching([$skill->getKey() => ['level' => $currentSkillLevel + 1]]);
             DB::commit();
-
-            return ['success' => true, 'message' => 'Skill improved successfully.'];
-        } catch (Exception $e) {
+        } catch (Exception $exception) {
             DB::rollBack();
-
-            return ['success' => false, 'message' => $e->getMessage()];
+            throw $exception;
         }
     }
 }

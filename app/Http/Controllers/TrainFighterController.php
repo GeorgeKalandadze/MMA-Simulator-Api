@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Actions\Fighter\TrainFighter;
 use App\Http\Requests\TrainFighterRequest;
+use Illuminate\Http\JsonResponse;
 
 
 class TrainFighterController extends Controller
@@ -11,7 +12,7 @@ class TrainFighterController extends Controller
     /**
      * Handle the incoming request.
      */
-    public function __invoke(TrainFighter $trainFighter, TrainFighterRequest $request)
+    public function __invoke(TrainFighter $trainFighter, TrainFighterRequest $request): JsonResponse
     {
         $data = $request->validated();
         $user = auth()->user();
