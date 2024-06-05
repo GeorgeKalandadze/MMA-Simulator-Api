@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/fighters', CreateFighterController::class)->middleware('permission:create_fighter');
-    Route::post('/fighter/{skill}/improve', ImproveFighterSkillController::class);
+    Route::post('/fighter/{skill}/improve', ImproveFighterSkillController::class)->middleware('permission:improve_fighter_skill');
     Route::post('/fighters/train', TrainFighterController::class);
 });
 
