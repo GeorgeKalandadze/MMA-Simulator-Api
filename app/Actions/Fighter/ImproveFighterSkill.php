@@ -4,8 +4,8 @@ namespace App\Actions\Fighter;
 
 use App\Models\Fighter;
 use App\Models\Skill;
-use Illuminate\Support\Facades\DB;
 use Exception;
+use Illuminate\Support\Facades\DB;
 
 class ImproveFighterSkill
 {

@@ -6,7 +6,6 @@ use App\Actions\Fighter\TrainFighter;
 use App\Http\Requests\TrainFighterRequest;
 use Illuminate\Http\JsonResponse;
 
-
 class TrainFighterController extends Controller
 {
     /**
@@ -27,7 +26,7 @@ class TrainFighterController extends Controller
         return response()->json([
             'message' => 'Training successful',
             'improvement' => $result['improvement'],
-            'new_stats' => $result['new_stats']
+            'new_stats' => $result['new_stats'],
         ]);
     }
 }

@@ -7,7 +7,6 @@ use App\Models\WeightDivision;
 
 class CreateFighter
 {
-
     public function execute($data, $user): Fighter
     {
         $weightDivision = WeightDivision::where('min_weight', '<=', $data['weight'])

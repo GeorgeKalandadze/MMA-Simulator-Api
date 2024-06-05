@@ -16,13 +16,13 @@ class RoleSeeder extends Seeder
         $guardName = config('auth.defaults.guard');
 
         $permissions = [
-            'create_fighter', 'improve_fighter_skill'
+            'create_fighter', 'improve_fighter_skill',
         ];
 
         $roles = [
             'fighter' => [
                 'create_fighter',
-                'improve_fighter_skill'
+                'improve_fighter_skill',
             ],
             'sponsor' => [],
             'organizer' => [],

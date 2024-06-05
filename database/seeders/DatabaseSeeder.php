@@ -16,7 +16,7 @@ class DatabaseSeeder extends Seeder
             MartialArtStyleSeeder::class,
             WeightDivisionSeeder::class,
             SkillSeeder::class,
-            CountrySeeder::class
+            CountrySeeder::class,
         ]);
     }
 }

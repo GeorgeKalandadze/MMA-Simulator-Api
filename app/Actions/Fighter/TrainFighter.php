@@ -30,7 +30,7 @@ class TrainFighter
 
         return [
             'improvement' => $improvement,
-            'new_stats' => $fighter->only('strength', 'agility', 'stamina')
+            'new_stats' => $fighter->only('strength', 'agility', 'stamina'),
         ];
     }
 
