@@ -6,8 +6,6 @@ use App\Models\Fighter;
 use App\Models\WeightDivision;
 use App\Models\MartialArtStyle;
 use App\Actions\Fighter\CreateFighter;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-
 
 beforeEach(function () {
 
