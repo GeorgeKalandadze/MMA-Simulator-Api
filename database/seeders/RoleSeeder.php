@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Spatie\Permission\Models\Permission;
 
 class RoleSeeder extends Seeder
 {
@@ -14,14 +15,30 @@ class RoleSeeder extends Seeder
     {
         $guardName = config('auth.defaults.guard');
 
-        $roles = [
-            ['name' => 'fighter', 'guard_name' => $guardName],
-            ['name' => 'sponsor', 'guard_name' => $guardName],
-            ['name' => 'organizer', 'guard_name' => $guardName],
+        $permissions = [
+            'create_fighter', 'improve_fighter_skill',
         ];
 
-        if (! DB::table('roles')->count()) {
-            DB::table('roles')->insert($roles);
+        $roles = [
+            'fighter' => [
+                'create_fighter',
+                'improve_fighter_skill',
+            ],
+            'sponsor' => [],
+            'organizer' => [],
+        ];
+
+        foreach ($permissions as $permission) {
+            Permission::create(['name' => $permission]);
+        }
+
+        foreach ($roles as $roleName => $permissionNames) {
+            $roleId = DB::table('roles')->insertGetId(['name' => $roleName, 'guard_name' => $guardName]);
+
+            foreach ($permissionNames as $permissionName) {
+                $permissionId = Permission::where('name', $permissionName)->first()->id;
+                DB::table('role_has_permissions')->insert(['role_id' => $roleId, 'permission_id' => $permissionId]);
+            }
         }
     }
 }

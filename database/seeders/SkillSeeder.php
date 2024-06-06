@@ -16,52 +16,52 @@ class SkillSeeder extends Seeder
             [
                 'name' => 'Striking',
                 'description' => 'Skill in striking techniques such as punches, kicks, and elbows.',
-                'price' => 50.00,
+                'price' => 80.00,
             ],
             [
                 'name' => 'Grappling',
                 'description' => 'Skill in grappling techniques such as throws, takedowns, and submissions.',
-                'price' => 60.00,
+                'price' => 90.00,
             ],
             [
                 'name' => 'Wrestling',
                 'description' => 'Skill in wrestling techniques such as takedowns, pins, and reversals.',
-                'price' => 55.00,
+                'price' => 70.00,
             ],
             [
                 'name' => 'Jiu-Jitsu',
                 'description' => 'Skill in Brazilian Jiu-Jitsu techniques such as joint locks and chokeholds.',
-                'price' => 70.00,
+                'price' => 100.00,
             ],
             [
                 'name' => 'Muay Thai',
                 'description' => 'Skill in Muay Thai techniques such as knee strikes, clinching, and sweeps.',
-                'price' => 65.00,
+                'price' => 90.00,
             ],
             [
                 'name' => 'Boxing',
                 'description' => 'Skill in the art of boxing, including punches, footwork, and defensive techniques.',
-                'price' => 55.00,
+                'price' => 80.00,
             ],
             [
                 'name' => 'Kickboxing',
                 'description' => 'Skill combining elements of boxing and various kicking techniques.',
-                'price' => 60.00,
+                'price' => 80.00,
             ],
             [
                 'name' => 'Karate',
                 'description' => 'Skill in the traditional Japanese martial art of Karate, emphasizing striking techniques with hands and feet.',
-                'price' => 65.00,
+                'price' => 90.00,
             ],
             [
                 'name' => 'Taekwondo',
                 'description' => 'Skill in the Korean martial art of Taekwondo, known for its emphasis on kicking techniques.',
-                'price' => 60.00,
+                'price' => 80.00,
             ],
             [
                 'name' => 'Capoeira',
                 'description' => 'Skill in the Afro-Brazilian martial art of Capoeira, combining elements of dance, acrobatics, and music.',
-                'price' => 70.00,
+                'price' => 100.00,
             ],
         ];
 

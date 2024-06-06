@@ -17,7 +17,7 @@ return new class extends Migration
             $table->integer('strength')->default(0);
             $table->integer('agility')->default(0);
             $table->integer('stamina')->default(0);
-            $table->integer('balance')->default(0);
+            $table->integer('balance')->default(5000);
             $table->integer('height');
             $table->integer('weight');
             $table->foreignIdFor(\App\Models\WeightDivision::class)->constrained()->cascadeOnDelete();

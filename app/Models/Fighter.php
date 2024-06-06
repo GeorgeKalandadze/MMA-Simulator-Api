@@ -13,7 +13,8 @@ class Fighter extends Model
     use HasFactory;
 
     protected $fillable = [
-        'user_id',
+        'firstname',
+        'lastname',
         'strength',
         'agility',
         'stamina',
@@ -68,5 +69,10 @@ class Fighter extends Model
     public function fightsAsFighter2(): HasMany
     {
         return $this->hasMany(Fight::class, 'fighter2_id');
+    }
+
+    public function trainingSessions(): HasMany
+    {
+        return $this->hasMany(TrainingSession::class);
     }
 }
