@@ -17,7 +17,6 @@ class ImproveFighterSkill
         try {
             DB::beginTransaction();
             $currentSkillLevel = $fighter->skills()->find($skill->getKey())?->pivot?->level ?? 0;
-
             if ($currentSkillLevel >= 5) {
                 throw new Exception('Skill level cannot exceed the maximum limit of 5.');
             }

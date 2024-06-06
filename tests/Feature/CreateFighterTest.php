@@ -1,11 +1,11 @@
 <?php
 
-use App\Models\User;
+use App\Actions\Fighter\CreateFighter;
 use App\Models\Country;
 use App\Models\Fighter;
-use App\Models\WeightDivision;
 use App\Models\MartialArtStyle;
-use App\Actions\Fighter\CreateFighter;
+use App\Models\User;
+use App\Models\WeightDivision;
 
 beforeEach(function () {
 

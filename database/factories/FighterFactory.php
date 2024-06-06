@@ -2,16 +2,14 @@
 
 namespace Database\Factories;
 
-use App\Models\Fighter;
 use App\Models\Country;
+use App\Models\MartialArtStyle;
 use App\Models\User;
 use App\Models\WeightDivision;
-use App\Models\MartialArtStyle;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class FighterFactory extends Factory
 {
-
     public function definition()
     {
         return [
@@ -26,7 +24,7 @@ class FighterFactory extends Factory
             'weight_division_id' => WeightDivision::inRandomOrder()->first()->id,
             'martial_art_style_id' => MartialArtStyle::inRandomOrder()->first()->id,
             'country_id' => Country::inRandomOrder()->first()->id,
-            'user_id' => User::factory()->create()->id
+            'user_id' => User::factory()->create()->id,
         ];
     }
 }
