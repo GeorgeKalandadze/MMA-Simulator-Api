@@ -18,7 +18,7 @@ class TrainFighter
         $this->validateTraining($fighter);
 
         $baseImprovement = $this->getBaseImprovement($trainingType);
-        $improvement = (int) ($baseImprovement * $intensity * $this->getRandomFactor());
+        $improvement = (int) ($baseImprovement * $intensity * getRandomFactor());
 
         if ($this->isOvertrained($fighter, $trainingType)) {
             $improvement *= 0.5;
@@ -63,10 +63,6 @@ class TrainFighter
         return $base[$type->name];
     }
 
-    private function getRandomFactor(): float
-    {
-        return mt_rand(80, 120) / 100;
-    }
 
     private function isOvertrained(Fighter $fighter, TrainingType $trainingType): bool
     {
