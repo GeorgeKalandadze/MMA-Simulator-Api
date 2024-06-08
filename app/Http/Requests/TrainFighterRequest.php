@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests;
 
+use App\Enums\TrainingType;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rules\Enum;
 
 class TrainFighterRequest extends FormRequest
 {
@@ -22,7 +24,7 @@ class TrainFighterRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'training_type' => 'required|string|in:strength,agility,stamina',
+            'training_type' => ['required', new Enum(TrainingType::class)],
             'intensity' => 'required|integer|min:1|max:10',
         ];
     }

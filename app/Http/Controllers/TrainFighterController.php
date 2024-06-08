@@ -17,7 +17,7 @@ class TrainFighterController extends Controller
         $user = auth()->user();
         $fighter = $user->fighter;
 
-        $result = $trainFighter->execute(
+         $trainFighter->execute(
             $fighter,
             $data['training_type'],
             $data['intensity']
@@ -25,8 +25,6 @@ class TrainFighterController extends Controller
 
         return response()->json([
             'message' => 'Training successful',
-            'improvement' => $result['improvement'],
-            'new_stats' => $result['new_stats'],
         ]);
     }
 }

@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 
 class TrainFighter
 {
-    public function execute(Fighter $fighter, string $trainingType, int $intensity): array
+    public function execute(Fighter $fighter, string $trainingType, int $intensity): void
     {
         $baseImprovement = $this->getBaseImprovement($trainingType);
         $improvement = (int) ($baseImprovement * $intensity * $this->getRandomFactor());
@@ -28,10 +28,6 @@ class TrainFighter
             ]);
         });
 
-        return [
-            'improvement' => $improvement,
-            'new_stats' => $fighter->only('strength', 'agility', 'stamina'),
-        ];
     }
 
     private function getBaseImprovement(string $type): int

@@ -8,7 +8,8 @@ use Illuminate\Http\Response;
 
 abstract class Controller
 {
-    use AuthorizesRequests, ValidatesRequests;
+    use AuthorizesRequests;
+    use ValidatesRequests;
 
     protected function statusCode(int $code, $content = null): Response
     {
