@@ -12,7 +12,7 @@ class TrainingSession extends Model
 
     protected $fillable = [
         'fighter_id',
-        'training_type',
+        'training_type_id',
         'improvement',
         'created_at',
     ];
@@ -20,5 +20,10 @@ class TrainingSession extends Model
     public function fighter(): BelongsTo
     {
         return $this->belongsTo(Fighter::class);
+    }
+
+    public function trainingType(): BelongsTo
+    {
+        return $this->belongsTo(TrainingType::class);
     }
 }

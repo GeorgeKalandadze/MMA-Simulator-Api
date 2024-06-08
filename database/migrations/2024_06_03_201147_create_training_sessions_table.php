@@ -14,7 +14,6 @@ return new class() extends Migration
         Schema::create('training_sessions', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(\App\Models\Fighter::class)->constrained()->cascadeOnDelete();
-            $table->string('training_type');
             $table->integer('improvement');
             $table->timestamps();
         });
