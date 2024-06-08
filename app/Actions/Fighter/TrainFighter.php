@@ -4,15 +4,18 @@ namespace App\Actions\Fighter;
 
 use App\Models\Fighter;
 use App\Models\TrainingSession;
+use App\Models\TrainingType;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
-use App\Enums\TrainingType;
 
 class TrainFighter
 {
+    /**
+     * @throws \Exception
+     */
     public function execute(Fighter $fighter, TrainingType $trainingType, int $intensity): void
     {
-        $this->validateTraining($fighter, $trainingType, $intensity);
+        $this->validateTraining($fighter);
 
         $baseImprovement = $this->getBaseImprovement($trainingType);
         $improvement = (int) ($baseImprovement * $intensity * $this->getRandomFactor());
@@ -22,26 +25,23 @@ class TrainFighter
         }
 
         DB::transaction(function () use ($fighter, $trainingType, $improvement) {
-            $fighter->{$trainingType->value} += $improvement;
+            $fighter->{$trainingType->name} += $improvement;
             $fighter->save();
 
             TrainingSession::create([
                 'fighter_id' => $fighter->id,
-                'training_type' => $trainingType->value,
+                'training_type_id' => $trainingType->id,
                 'improvement' => $improvement,
             ]);
         });
 
     }
 
-    private function validateTraining(Fighter $fighter, TrainingType $trainingType, int $intensity)
+    /**
+     * @throws \Exception
+     */
+    private function validateTraining(Fighter $fighter)
     {
-        // Validate intensity
-        if ($intensity < 1 || $intensity > 10) {
-            throw new \InvalidArgumentException('Intensity must be between 1 and 10.');
-        }
-
-        // Validate weekly training limit
         $weekAgo = Carbon::now()->subWeek();
         $trainingCount = TrainingSession::where('fighter_id', $fighter->id)
             ->where('created_at', '>=', $weekAgo)
@@ -55,12 +55,12 @@ class TrainFighter
     private function getBaseImprovement(TrainingType $type): int
     {
         $base = [
-            TrainingType::Strength->value => 1,
-            TrainingType::Agility->value => 1,
-            TrainingType::Stamina->value => 1,
+            'strength' => 1,
+            'agility' => 1,
+            'stamina' => 1,
         ];
 
-        return $base[$type->value];
+        return $base[$type->name];
     }
 
     private function getRandomFactor(): float
@@ -72,7 +72,7 @@ class TrainFighter
     {
         $weekAgo = Carbon::now()->subWeek();
         $recentSessions = TrainingSession::where('fighter_id', $fighter->id)
-            ->where('training_type', $trainingType->value)
+            ->where('training_type_id', $trainingType->id)
             ->where('created_at', '>=', $weekAgo)
             ->count();
 
