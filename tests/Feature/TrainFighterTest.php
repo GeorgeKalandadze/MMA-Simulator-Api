@@ -5,11 +5,7 @@ use App\Models\Fighter;
 use App\Models\TrainingSession;
 use App\Models\TrainingType;
 use Carbon\Carbon;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Facades\DB;
-use function Pest\Laravel\get;
-use function Pest\Laravel\post;
-use function Pest\Laravel\expectException;
+
 use function Pest\Laravel\withExceptionHandling;
 
 beforeEach(function () {

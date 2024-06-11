@@ -14,7 +14,7 @@ return new class() extends Migration
         Schema::create('fights', function (Blueprint $table) {
             $table->id();
             $table->date('fight_date');
-            $table->enum('status', ['upcoming', 'completed', 'canceled'])->default('upcoming');
+            $table->enum('status', ['scheduled', 'completed', 'canceled'])->default('scheduled');
             $table->string('location')->nullable();
             $table->timestamps();
         });
