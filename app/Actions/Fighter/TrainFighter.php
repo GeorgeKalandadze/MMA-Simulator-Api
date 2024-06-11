@@ -34,7 +34,6 @@ class TrainFighter
                 'improvement' => $improvement,
             ]);
         });
-
     }
 
     /**
