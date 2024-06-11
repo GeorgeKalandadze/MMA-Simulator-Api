@@ -22,7 +22,7 @@ class TrainFighterRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'training_type' => 'required|string|in:strength,agility,stamina',
+            'training_type' => 'required|exists:training_types,id',
             'intensity' => 'required|integer|min:1|max:10',
         ];
     }

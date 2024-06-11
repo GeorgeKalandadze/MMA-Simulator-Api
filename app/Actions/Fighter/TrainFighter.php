@@ -4,37 +4,54 @@ namespace App\Actions\Fighter;
 
 use App\Models\Fighter;
 use App\Models\TrainingSession;
+use App\Models\TrainingType;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
 class TrainFighter
 {
-    public function execute(Fighter $fighter, string $trainingType, int $intensity): array
+    /**
+     * @throws \Exception
+     */
+    public function execute(Fighter $fighter, TrainingType $trainingType, int $intensity): void
     {
-        $baseImprovement = $this->getBaseImprovement($trainingType);
-        $improvement = (int) ($baseImprovement * $intensity * $this->getRandomFactor());
+        $this->validateTraining($fighter);
 
-        if ($this->isOvertrained($fighter)) {
+        $baseImprovement = $this->getBaseImprovement($trainingType);
+        $improvement = (int) ($baseImprovement * $intensity * getRandomFactor());
+
+        if ($this->isOvertrained($fighter, $trainingType)) {
             $improvement *= 0.5;
         }
 
         DB::transaction(function () use ($fighter, $trainingType, $improvement) {
-            $fighter->{$trainingType} += $improvement;
+            $fighter->{$trainingType->name} += $improvement;
             $fighter->save();
 
             TrainingSession::create([
                 'fighter_id' => $fighter->id,
-                'training_type' => $trainingType,
+                'training_type_id' => $trainingType->id,
                 'improvement' => $improvement,
             ]);
         });
-
-        return [
-            'improvement' => $improvement,
-            'new_stats' => $fighter->only('strength', 'agility', 'stamina'),
-        ];
     }
 
-    private function getBaseImprovement(string $type): int
+    /**
+     * @throws \Exception
+     */
+    private function validateTraining(Fighter $fighter)
+    {
+        $weekAgo = Carbon::now()->subWeek();
+        $trainingCount = TrainingSession::where('fighter_id', $fighter->id)
+            ->where('created_at', '>=', $weekAgo)
+            ->count();
+
+        if ($trainingCount >= 3) {
+            throw new \Exception('Fighter cannot train more than three times in a week.');
+        }
+    }
+
+    private function getBaseImprovement(TrainingType $type): int
     {
         $base = [
             'strength' => 1,
@@ -42,20 +59,17 @@ class TrainFighter
             'stamina' => 1,
         ];
 
-        return $base[$type];
+        return $base[$type->name];
     }
 
-    private function getRandomFactor(): float
+    private function isOvertrained(Fighter $fighter, TrainingType $trainingType): bool
     {
-        return mt_rand(80, 120) / 100;
-    }
-
-    private function isOvertrained(Fighter $fighter): bool
-    {
+        $weekAgo = Carbon::now()->subWeek();
         $recentSessions = TrainingSession::where('fighter_id', $fighter->id)
-            ->where('created_at', '>', now()->subDays(7))
+            ->where('training_type_id', $trainingType->id)
+            ->where('created_at', '>=', $weekAgo)
             ->count();
 
-        return $recentSessions > 10;
+        return $recentSessions >= 1;
     }
 }

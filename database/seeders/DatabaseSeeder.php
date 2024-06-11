@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
             WeightDivisionSeeder::class,
             SkillSeeder::class,
             CountrySeeder::class,
+            TrainingTypeSeeder::class,
         ]);
     }
 }
