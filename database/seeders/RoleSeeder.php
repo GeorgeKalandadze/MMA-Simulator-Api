@@ -16,7 +16,7 @@ class RoleSeeder extends Seeder
         $guardName = config('auth.defaults.guard');
 
         $permissions = [
-            'create_fighter', 'improve_fighter_skill',
+            'create_fighter', 'improve_fighter_skill', 'create_fight_match', 'cancel_fight_match'
         ];
 
         $roles = [
@@ -25,7 +25,10 @@ class RoleSeeder extends Seeder
                 'improve_fighter_skill',
             ],
             'sponsor' => [],
-            'organizer' => [],
+            'organizer' => [
+                'create_fight_match',
+                'cancel_fight_match'
+            ],
         ];
 
         foreach ($permissions as $permission) {
