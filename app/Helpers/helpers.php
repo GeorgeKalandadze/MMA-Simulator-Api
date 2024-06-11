@@ -2,5 +2,5 @@
 
 function getRandomFactor(): float
 {
-    return mt_rand(80, 120) / 100;
+    return mt_rand(30, 50) / 100;
 }

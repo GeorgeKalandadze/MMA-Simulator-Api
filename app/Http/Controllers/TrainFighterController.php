@@ -11,6 +11,7 @@ class TrainFighterController extends Controller
 {
     /**
      * Handle the incoming request.
+     *
      * @throws \Exception
      */
     public function __invoke(TrainFighter $trainFighter, TrainFighterRequest $request): JsonResponse

@@ -5,8 +5,8 @@ namespace App\Actions\Fighter;
 use App\Models\Fighter;
 use App\Models\TrainingSession;
 use App\Models\TrainingType;
-use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class TrainFighter
 {
@@ -63,7 +63,6 @@ class TrainFighter
         return $base[$type->name];
     }
 
-
     private function isOvertrained(Fighter $fighter, TrainingType $trainingType): bool
     {
         $weekAgo = Carbon::now()->subWeek();
@@ -72,6 +71,6 @@ class TrainFighter
             ->where('created_at', '>=', $weekAgo)
             ->count();
 
-        return $recentSessions >= 3;
+        return $recentSessions >= 1;
     }
 }
