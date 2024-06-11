@@ -61,16 +61,6 @@ class Fighter extends Model
         return $this->hasMany(Transaction::class);
     }
 
-    public function fightsAsFighter1(): HasMany
-    {
-        return $this->hasMany(Fight::class, 'fighter1_id');
-    }
-
-    public function fightsAsFighter2(): HasMany
-    {
-        return $this->hasMany(Fight::class, 'fighter2_id');
-    }
-
     public function trainingSessions(): HasMany
     {
         return $this->hasMany(TrainingSession::class);

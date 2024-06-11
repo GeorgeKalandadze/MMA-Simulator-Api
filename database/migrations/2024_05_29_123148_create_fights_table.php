@@ -13,9 +13,6 @@ return new class() extends Migration
     {
         Schema::create('fights', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('fighter1_id')->constrained('fighters')->onDelete('cascade');
-            $table->foreignId('fighter2_id')->constrained('fighters')->onDelete('cascade');
-            $table->foreignId('winner_id')->nullable()->constrained('fighters')->onDelete('set null');
             $table->date('fight_date');
             $table->enum('status', ['upcoming', 'completed', 'canceled'])->default('upcoming');
             $table->string('location')->nullable();
