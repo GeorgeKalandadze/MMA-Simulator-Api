@@ -65,4 +65,9 @@ class Fighter extends Model
     {
         return $this->hasMany(TrainingSession::class);
     }
+
+    public function fights(): BelongsToMany
+    {
+        return $this->belongsToMany(Fight::class)->withPivot('result', 'role')->withTimestamps();
+    }
 }

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Fight extends Model
 {
@@ -14,4 +15,9 @@ class Fight extends Model
         'status',
         'location',
     ];
+
+    public function fighters(): BelongsToMany
+    {
+        return $this->belongsToMany(Fighter::class)->withPivot('result')->withTimestamps();
+    }
 }
