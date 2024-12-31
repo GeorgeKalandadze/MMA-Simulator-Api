@@ -19,6 +19,7 @@ class CreateFighter
         $fighter->weight_division_id = $weightDivision->id;
         $fighter->save();
 
+
         return $fighter;
     }
 }
