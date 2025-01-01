@@ -21,6 +21,7 @@ class CreateFighter
 
 
 
+
         return $fighter;
     }
 }
