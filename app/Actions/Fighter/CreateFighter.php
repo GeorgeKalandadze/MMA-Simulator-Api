@@ -20,6 +20,7 @@ class CreateFighter
         $fighter->save();
 
 
+
         return $fighter;
     }
 }
